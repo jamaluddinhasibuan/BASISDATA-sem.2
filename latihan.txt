@@ -1,0 +1,618 @@
+                                                         1
+                                                        111
+                                                       11111
+                                                      1111111
+                                                     111111111
+                                                    11111111111
+                                                   1111111111111
+                                                  1111111 1111111
+                                                 1111111 1 1111111
+                                                1111111 111 1111111
+                                               1111111 11 11 1111111
+                                              111111111 111 111111111
+                                             11111111111 1 11111111111
+                                            1111111111111 1111111111111
+                                           11111111111111111111111111111
+
+11111    11    11  11   11    11    11       11  11  1111     1111     11  1111    11
+   11  11  11  11 1   1 11  11  11  11       11  11  11  11   11  11   11  11 11   11
+   11  111111  11       11  111111  11       11  11  11   11  11   11  11  11  11  11
+   11  11  11  11       11  11  11  11       11  11  11  11   11  11   11  11   11 11 
+11111  11  11  11       11  11  11  1111111  111111  1111     1111     11  11    1111 
+
+
+
+
+
+jamal@LAPTOP-D7MC31M7 c:\xampp01
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 41
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE dbtoko;
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dbtoko             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.007 sec)
+
+MariaDB [(none)]> CREATE DATABASE dbti08;
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dbti08             |
+| dbtoko             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+7 rows in set (0.005 sec)
+
+MariaDB [(none)]> use dbti08;
+Database changed
+MariaDB [dbti08]> show tables;
+Empty set (0.010 sec)
+
+MariaDB [dbti08]> CREATE TABLE jenis(
+    -> id int primary key auto_increment,
+    -> nama varchar(30) not null unique);
+Query OK, 0 rows affected (0.105 sec)
+
+MariaDB [dbti08]> DESC jenis;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.034 sec)
+
+MariaDB [dbti08]> DESC barang;
+ERROR 1146 (42S02): Table 'dbti08.barang' doesn't exist
+MariaDB [dbti08]> DESC jenis;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.025 sec)
+
+MariaDB [dbti08]> CREATE TABLE produk(
+    -> id int primary key auto_increment,
+    -> nama varchar(30) not null unique,
+    -> stok int not null,
+    -> harga double not null,
+    -> idjenis int not null references jenis(id),
+    -> foto varchar(30));
+Query OK, 0 rows affected (0.066 sec)
+
+MariaDB [dbti08]> DESC produk;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama    | varchar(30) | NO   | UNI | NULL    |                |
+| stok    | int(11)     | NO   |     | NULL    |                |
+| harga   | double      | NO   |     | NULL    |                |
+| idjenis | int(11)     | NO   |     | NULL    |                |
+| foto    | varchar(30) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+6 rows in set (0.030 sec)
+
+MariaDB [dbti08]> SHOW TABLES;
++------------------+
+| Tables_in_dbti08 |
++------------------+
+| jenis            |
+| produk           |
++------------------+
+2 rows in set (0.006 sec)
+
+MariaDB [dbti08]> DESC jenis;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.021 sec)
+
+
+MariaDB [dbti08]> DESC produk;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama    | varchar(30) | NO   | UNI | NULL    |                |
+| stok    | int(11)     | NO   |     | NULL    |                |
+| harga   | double      | NO   |     | NULL    |                |
+| idjenis | int(11)     | NO   |     | NULL    |                |
+| foto    | varchar(30) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+6 rows in set (0.024 sec)
+
+MariaDB [dbti08]> SELECT * FROM jenis;
+Empty set (0.012 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk;
+Empty set (0.001 sec)
+
+
+MariaDB [dbti08]> SELECT * FROM jenis;
++----+------------+
+| id | nama       |
++----+------------+
+|  1 | Elektronik |
+|  2 | Furniture  |
+|  3 | Makanan    |
+|  4 | Minuman    |
++----+------------+
+4 rows in set (0.003 sec)
+
+MariaDB [dbti08]> DESC produk;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama    | varchar(30) | NO   | UNI | NULL    |                |
+| stok    | int(11)     | NO   |     | NULL    |                |
+| harga   | double      | NO   |     | NULL    |                |
+| idjenis | int(11)     | NO   |     | NULL    |                |
+| foto    | varchar(30) | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+6 rows in set (0.019 sec)
+
+
+MariaDB [dbti08]> INSERT INTO produk (nama,stok,harga,idjenis,foto) VALUES
+    -> ('Kulkas LG 14 Pintu',2,7000000,1,'kulkas.jpg');
+Query OK, 1 row affected (0.009 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
++----+--------------------+------+---------+---------+------------+
+1 row in set (0.002 sec)
+
+MariaDB [dbti08]> INSERT INTO produk (nama,stok,harga,idjenis,foto) VALUES
+    -> ('Lemari Baju',5,6000000,2,'lemari.jpg'),
+    -> ('Laptop ASUS',10,7500000,1,'laptop.jpg');
+Query OK, 2 rows affected (0.006 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg |
+|  3 | Laptop ASUS        |   10 | 7500000 |       1 | laptop.jpg |
++----+--------------------+------+---------+---------+------------+
+3 rows in set (0.001 sec)
+
+
+MariaDB [dbti08]> INSERT INTO produk (nama,stok,harga,idjenis,foto) VALUES
+    -> ('Basreng',100,10000,3,'basreng.jpg'),
+    -> ('Fanta',75,8000,4,'fanta.jpg');
+Query OK, 2 rows affected (0.008 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+-------------+
+| id | nama               | stok | harga   | idjenis | foto        |
++----+--------------------+------+---------+---------+-------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg  |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg  |
+|  3 | Laptop ASUS        |   10 | 7500000 |       1 | laptop.jpg  |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg |
+|  5 | Fanta              |   75 |    8000 |       4 | fanta.jpg   |
++----+--------------------+------+---------+---------+-------------+
+5 rows in set (0.002 sec)
+
+MariaDB [dbti08]> UPDATE produk SET nama='Laptop Lenovo',harga=5000000,idjenis=4,stok=250 WHERE id=3;
+Query OK, 1 row affected (0.025 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+-------------+
+| id | nama               | stok | harga   | idjenis | foto        |
++----+--------------------+------+---------+---------+-------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg  |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg  |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg  |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg |
+|  5 | Fanta              |   75 |    8000 |       4 | fanta.jpg   |
++----+--------------------+------+---------+---------+-------------+
+5 rows in set (0.001 sec)
+
+
+MariaDB [dbti08]> DELETE FROM produk WHERE id=5;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [dbti08]> INSERT INTO produk (nama,stok,harga,idjenis,foto) VALUES
+    -> ('Seblak',35,15000,3,'seblak.jpg');
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+-------------+
+| id | nama               | stok | harga   | idjenis | foto        |
++----+--------------------+------+---------+---------+-------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg  |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg  |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg  |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg  |
++----+--------------------+------+---------+---------+-------------+
+5 rows in set (0.002 sec)
+
+MariaDB [dbti08]> \q
+bye
+MariaDB[dbtio8]> exit
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+jamal@LAPTOP-D7MC31M7 c:\xampp01
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dbjualan           |
+| dbti08             |
+| dbtoko             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+8 rows in set (0.051 sec)
+
+MariaDB [(none)]> use dbti08;
+Database changed
+MariaDB [dbti08]> SHOW TABLES;
++------------------+
+| Tables_in_dbti08 |
++------------------+
+| jenis            |
+| produk           |
++------------------+
+2 rows in set (0.003 sec)
+
+MariaDB [dbti08]> SELECT * FROM jenis;
++----+------------+
+| id | nama       |
++----+------------+
+|  1 | Elektronik |
+|  2 | Furniture  |
+|  3 | Makanan    |
+|  4 | Minuman    |
++----+------------+
+4 rows in set (0.073 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+-------------+
+| id | nama               | stok | harga   | idjenis | foto        |
++----+--------------------+------+---------+---------+-------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg  |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg  |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg  |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg  |
++----+--------------------+------+---------+---------+-------------+
+5 rows in set (0.006 sec)
+
+MariaDB [dbti08]> SELECT nama,stok FROM produk;
++--------------------+------+
+| nama               | stok |
++--------------------+------+
+| Kulkas LG 14 Pintu |    2 |
+| Lemari Baju        |    5 |
+| Laptop Lenovo      |  250 |
+| Basreng            |  100 |
+| Seblak             |   35 |
++--------------------+------+
+5 rows in set (0.043 sec)
+
+MariaDB [dbti08]> SELECT * FROM barang WHERE harga >= 1000000;
+ERROR 1146 (42S02): Table 'dbti08.barang' doesn't exist
+MariaDB [dbti08]> SELECT * FROM produk WHERE harga >= 1000000;
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg |
++----+--------------------+------+---------+---------+------------+
+3 rows in set (0.013 sec)
+
+MariaDB [dbti08]> INSERT INTO barang (nama, stok, harga, idjenis, foto) VALUES
+    -> ('es teh manis', 25, 25000,4, 'tesmanis.jpg');
+ERROR 1146 (42S02): Table 'dbti08.barang' doesn't exist
+MariaDB [dbti08]> INSERT INTO produk (nama, stok, harga, idjenis, foto) VALUES
+    -> ('es teh manis',25,25000,4, 'tehmanis.jpg');
+Query OK, 1 row affected (0.028 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+--------------+
+| id | nama               | stok | harga   | idjenis | foto         |
++----+--------------------+------+---------+---------+--------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg   |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg   |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg   |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg  |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg   |
+|  7 | es teh manis       |   25 |   25000 |       4 | tehmanis.jpg |
++----+--------------------+------+---------+---------+--------------+
+6 rows in set (0.004 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE stok=5;
++----+-------------+------+---------+---------+------------+
+| id | nama        | stok | harga   | idjenis | foto       |
++----+-------------+------+---------+---------+------------+
+|  2 | Lemari Baju |    5 | 6000000 |       2 | lemari.jpg |
++----+-------------+------+---------+---------+------------+
+1 row in set (0.008 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE stok<>5;
++----+--------------------+------+---------+---------+--------------+
+| id | nama               | stok | harga   | idjenis | foto         |
++----+--------------------+------+---------+---------+--------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg   |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg   |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg  |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg   |
+|  7 | es teh manis       |   25 |   25000 |       4 | tehmanis.jpg |
++----+--------------------+------+---------+---------+--------------+
+5 rows in set (0.005 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE harga >=1000000 AND stok >= 5;
++----+---------------+------+---------+---------+------------+
+| id | nama          | stok | harga   | idjenis | foto       |
++----+---------------+------+---------+---------+------------+
+|  2 | Lemari Baju   |    5 | 6000000 |       2 | lemari.jpg |
+|  3 | Laptop Lenovo |  250 | 5000000 |       4 | laptop.jpg |
++----+---------------+------+---------+---------+------------+
+2 rows in set (0.026 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE harga >= 1000000 OR stok >= 5;
++----+--------------------+------+---------+---------+--------------+
+| id | nama               | stok | harga   | idjenis | foto         |
++----+--------------------+------+---------+---------+--------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg   |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg   |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg   |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg  |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg   |
+|  7 | es teh manis       |   25 |   25000 |       4 | tehmanis.jpg |
++----+--------------------+------+---------+---------+--------------+
+6 rows in set (0.005 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE nama='Basreng';
++----+---------+------+-------+---------+-------------+
+| id | nama    | stok | harga | idjenis | foto        |
++----+---------+------+-------+---------+-------------+
+|  4 | Basreng |  100 | 10000 |       3 | basreng.jpg |
++----+---------+------+-------+---------+-------------+
+1 row in set (0.010 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE foto IN ('kulkas.jpg','lemari.jpg');
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg |
++----+--------------------+------+---------+---------+------------+
+2 rows in set (0.014 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE foto NOT IN ('tehmanis.jpg','laptop.jpg');
++----+--------------------+------+---------+---------+-------------+
+| id | nama               | stok | harga   | idjenis | foto        |
++----+--------------------+------+---------+---------+-------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg  |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg  |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg  |
++----+--------------------+------+---------+---------+-------------+
+4 rows in set (0.002 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk ORDER BY nama ASC;
++----+--------------------+------+---------+---------+--------------+
+| id | nama               | stok | harga   | idjenis | foto         |
++----+--------------------+------+---------+---------+--------------+
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg  |
+|  7 | es teh manis       |   25 |   25000 |       4 | tehmanis.jpg |
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg   |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg   |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg   |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg   |
++----+--------------------+------+---------+---------+--------------+
+6 rows in set (0.029 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk ORDER BY nama DESC;
++----+--------------------+------+---------+---------+--------------+
+| id | nama               | stok | harga   | idjenis | foto         |
++----+--------------------+------+---------+---------+--------------+
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg   |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg   |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg   |
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg   |
+|  7 | es teh manis       |   25 |   25000 |       4 | tehmanis.jpg |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg  |
++----+--------------------+------+---------+---------+--------------+
+6 rows in set (0.003 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE harga >=1000000;
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg |
++----+--------------------+------+---------+---------+------------+
+3 rows in set (0.009 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE harga >=1000000 ORDER BY nama DESC;
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg |
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
++----+--------------------+------+---------+---------+------------+
+3 rows in set (0.002 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk WHERE harga >=1000000 ORDER BY nama ASC;
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg |
++----+--------------------+------+---------+---------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk;
++----+--------------------+------+---------+---------+--------------+
+| id | nama               | stok | harga   | idjenis | foto         |
++----+--------------------+------+---------+---------+--------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg   |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg   |
+|  3 | Laptop Lenovo      |  250 | 5000000 |       4 | laptop.jpg   |
+|  4 | Basreng            |  100 |   10000 |       3 | basreng.jpg  |
+|  6 | Seblak             |   35 |   15000 |       3 | seblak.jpg   |
+|  7 | es teh manis       |   25 |   25000 |       4 | tehmanis.jpg |
++----+--------------------+------+---------+---------+--------------+
+6 rows in set (0.002 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk LIMIT 2;
++----+--------------------+------+---------+---------+------------+
+| id | nama               | stok | harga   | idjenis | foto       |
++----+--------------------+------+---------+---------+------------+
+|  1 | Kulkas LG 14 Pintu |    2 | 7000000 |       1 | kulkas.jpg |
+|  2 | Lemari Baju        |    5 | 6000000 |       2 | lemari.jpg |
++----+--------------------+------+---------+---------+------------+
+2 rows in set (0.038 sec)
+
+MariaDB [dbti08]> SELECT * FROM produk LIMIT 2 OFFSET 2;
++----+---------------+------+---------+---------+-------------+
+| id | nama          | stok | harga   | idjenis | foto        |
++----+---------------+------+---------+---------+-------------+
+|  3 | Laptop Lenovo |  250 | 5000000 |       4 | laptop.jpg  |
+|  4 | Basreng       |  100 |   10000 |       3 | basreng.jpg |
++----+---------------+------+---------+---------+-------------+
+2 rows in set (0.001 sec)
+
+MariaDB [dbti08]> SELECT COUNT(*) AS jumlah_barang FROM produk;
++---------------+
+| jumlah_barang |
++---------------+
+|             6 |
++---------------+
+1 row in set (0.012 sec)
+
+MariaDB [dbti08]> SELECT COUNT(*) FROM produk;
++----------+
+| COUNT(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.002 sec)
+
+MariaDB [dbti08]> SELECT MAX(harga) AS barang_termahal FROM produk;
++-----------------+
+| barang_termahal |
++-----------------+
+|         7000000 |
++-----------------+
+1 row in set (0.004 sec)
+
+MariaDB [dbti08]> SELECT MIN(harga) AS barang termurah FROM produk;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'termurah FROM produk' at line 1
+MariaDB [dbti08]> SELECT MIN(harga) AS barang_termurah FROM produk;
++-----------------+
+| barang_termurah |
++-----------------+
+|           10000 |
++-----------------+
+1 row in set (0.002 sec)
+
+MariaDB [dbti08]> SELECT AVG(hagra) AS rata2 FROM produk;
+ERROR 1054 (42S22): Unknown column 'hagra' in 'field list'
+MariaDB [dbti08]> SELECT AVG(harga) AS rata2 FROM produk;
++--------------------+
+| rata2              |
++--------------------+
+| 3008333.3333333335 |
++--------------------+
+1 row in set (0.002 sec)
+
+MariaDB [dbti08]> SELECT SUM(harga) AS total_harga FROM produk;
++-------------+
+| total_harga |
++-------------+
+|    18050000 |
++-------------+
+1 row in set (0.004 sec)
+
+MariaDB [dbti08]> SELECT SUM(harga) AS total_harga, MAX(harga) AS barang_termahal, MIN(harga) AS barang_termurah FROM produk;
++-------------+-----------------+-----------------+
+| total_harga | barang_termahal | barang_termurah |
++-------------+-----------------+-----------------+
+|    18050000 |         7000000 |           10000 |
++-------------+-----------------+-----------------+
+1 row in set (0.002 sec)
+
+MariaDB [dbti08]> Bye
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
